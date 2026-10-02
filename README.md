@@ -1,6 +1,6 @@
 # NovelHub
 
-A responsive novel discovery, translation, and reading app built with React, Vite, and Express. Requires Node.js 22 or later.
+A responsive novel discovery, translation, and reading app built with React, Vite, and Express. Requires Node.js 24.
 
 ## Run
 
@@ -30,3 +30,13 @@ Network access is needed to `api.mymemory.translated.net` and the host of each i
 ## Checks
 
 Run `npm test` with the application running to exercise the API validation and HTTP readiness. `npm run build` validates the production frontend bundle.
+
+## Vercel hosting
+
+Import this GitHub repository into Vercel. The committed `vercel.json` builds the Vite frontend and serves Express through `api/index.js`; no API key is required. Use Node.js 24. `FRONTEND_ORIGINS` may contain a comma-separated list of allowed browser origins; it defaults to `https://staed-web.github.io` for the GitHub Pages copy. Backend translations are subject to provider quotas and function time limits; prefer short chapters. The app's backend is not hosted by GitHub Pages.
+
+## GitHub Pages hosting
+
+In GitHub **Settings → Pages → Build and deployment**, select **GitHub Actions**. The committed workflow deploys the frontend when `main` changes or when manually run. The expected URL after a successful deployment is `https://staed-web.github.io/MTL-NovelHUB/`.
+
+To connect the Pages frontend to the Vercel backend, set the repository Actions variable `VITE_API_BASE_URL` to your verified Vercel origin (e.g. `https://your-project.vercel.app`, with no trailing path), then rerun the Pages workflow. Until that is configured, Pages provides discovery, bookmarks, and reader previews with a clear message that translation/import are not connected. The Vercel copy uses its own same-origin API and does not need this variable.
